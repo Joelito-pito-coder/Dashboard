@@ -381,26 +381,6 @@ body {
 }
 
 
-/* =========================================================
-   BOTÓN ACTUALIZAR DATOS
-   ========================================================= */
-
-#actualizar_datos {
-  background-color: var(--fertisa-azul) !important;
-  color: #FFFFFF !important;
-
-  border: 1px solid #344B58 !important;
-  border-radius: 4px !important;
-
-  box-shadow:
-    0 3px 6px rgba(0, 0, 0, 0.18) !important;
-
-  font-family: "Times New Roman", Times, serif !important;
-}
-
-#actualizar_datos:hover {
-  background-color: #344D5A !important;
-}
 
 
 /* =========================================================
@@ -708,6 +688,27 @@ library(DT)
 datos <- reactiveVal(
   datos_iniciales
 )
+
+# =========================================================
+# LIMPIAR FILTROS
+# =========================================================
+
+observeEvent(input$limpiar_filtros, {
+  
+  updateSelectInput(
+    session,
+    inputId = "departamento",
+    selected = "TODOS"
+  )
+  
+  updateSelectInput(
+    session,
+    inputId = "proveedor",
+    selected = "TODOS"
+  )
+  
+})
+
 
 # =========================================================
 # 2. FUNCIONES AUXILIARES
@@ -1269,24 +1270,11 @@ shiny::div(
     icon = icon("eraser"),
     class = "btn-outline-secondary",
     width = "100%"
-  ),
+  ))
   
-  # Este espacio empuja el siguiente botón al fondo
-  shiny::div(
-    style = "flex-grow: 1;"
-  ),
+
   
-  # =========================================================
-  # ACTUALIZAR DATOS - ABAJO DEL TODO
-  # =========================================================
-  actionButton(
-    inputId = "actualizar_datos",
-    label = "Actualizar datos",
-    icon = icon("rotate"),
-    class = "btn-primary",
-    width = "100%"
-  )
-)
+ 
 ```
 
 ## Column {width="50%"}
