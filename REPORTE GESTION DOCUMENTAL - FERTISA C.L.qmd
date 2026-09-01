@@ -16,6 +16,32 @@ execute:
 <style>
 
 /* =========================================================
+   LOGO DEL SIDEBAR
+   ========================================================= */
+
+.sidebar-logo-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 8px 10px 14px 10px;
+  margin-bottom: 5px;
+
+  border-bottom: 1px solid #D2D7DA;
+}
+
+.sidebar-logo {
+  width: 100%;
+  max-width: 170px;
+  height: auto;
+
+  object-fit: contain;
+  display: block;
+}
+
+
+/* =========================================================
    DISEÑO RESPONSIVO - CELULARES
    ========================================================= */
 
@@ -1191,12 +1217,28 @@ output$tabla_detalle <- DT::renderDT({
 ## Interacciones {.sidebar}
 
 ```{r}
+
 shiny::div(
   class = "sidebar-controles",
   
   # =========================================================
+  # LOGO FERTISA
+  # =========================================================
+  
+  shiny::div(
+    class = "sidebar-logo-container",
+    
+    shiny::tags$img(
+      src = "https://terminalfertisa.com/tf_content/wp-content/uploads/2021/05/cropped-cropped-logo-1.png",
+      alt = "Terminal Fertisa",
+      class = "sidebar-logo"
+    )
+  ),
+  
+  # =========================================================
   # FILTRO DE DEPARTAMENTO
   # =========================================================
+  
   selectInput(
     inputId = "departamento",
     label = "Departamento:",
