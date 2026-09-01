@@ -13,6 +13,32 @@ execute:
 
 ```{=html}
 <style>
+
+/* =========================================================
+   GRÁFICOS RESPONSIVOS Y CUADRADOS
+   ========================================================= */
+
+.grafico-cuadrado {
+  width: 100% !important;
+  max-width: 100% !important;
+
+  aspect-ratio: 1 / 1;
+
+  margin-left: auto !important;
+  margin-right: auto !important;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.grafico-cuadrado .shiny-plot-output {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+}
+
 /* =========================================================
    PALETA GENERAL
    ========================================================= */
@@ -1075,9 +1101,14 @@ shiny::div(
 #| title: "Cumplimiento Documental por proveedor"
 #| width: 64%
 
-plotOutput(
-  "grafico_departamento",
-  height = "100%"
+shiny::div(
+  class = "grafico-cuadrado",
+  
+  plotOutput(
+    "grafico_departamento",
+    width = "100%",
+    height = "100%"
+  )
 )
 ```
 
