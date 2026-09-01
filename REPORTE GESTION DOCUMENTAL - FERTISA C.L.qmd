@@ -1,9 +1,10 @@
 ---
-title: "REPORTE DE GESTION DOCUMENTAL"
+title: "REPORTE DE GESTIÓN DOCUMENTAL"
 format:
   dashboard:
     theme: cosmo
     orientation: columns
+    scrolling: true
 server: shiny
 execute:
   echo: false
@@ -13,6 +14,204 @@ execute:
 
 ```{=html}
 <style>
+
+/* =========================================================
+   DISEÑO RESPONSIVO - CELULARES
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  /* -------------------------------------------------------
+     ENCABEZADO
+     ------------------------------------------------------- */
+
+  .navbar {
+    min-height: 50px !important;
+  }
+
+  .navbar-brand,
+  .navbar-title {
+    font-size: 16px !important;
+    letter-spacing: 0.2px !important;
+    padding-left: 8px !important;
+  }
+
+
+  /* -------------------------------------------------------
+     SIDEBAR
+     ------------------------------------------------------- */
+
+  .sidebar {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .sidebar-controles {
+    height: auto !important;
+    min-height: auto !important;
+  }
+
+
+  /* -------------------------------------------------------
+     TARJETAS
+     ------------------------------------------------------- */
+
+  .card {
+    width: 100% !important;
+    max-width: 100% !important;
+
+    margin-bottom: 10px !important;
+  }
+
+
+  /* -------------------------------------------------------
+     KPI
+     ------------------------------------------------------- */
+
+  .kpi-compacto {
+    width: 100% !important;
+
+    height: auto !important;
+    max-height: none !important;
+  }
+
+  .kpi-compacto .bslib-grid {
+    width: 100% !important;
+
+    height: auto !important;
+    min-height: auto !important;
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr)) !important;
+
+    gap: 7px !important;
+  }
+
+  .kpi-compacto .bslib-value-box {
+    width: 100% !important;
+
+    height: 82px !important;
+    min-height: 82px !important;
+  }
+
+  .kpi-compacto .value-box-title {
+    font-size: 11px !important;
+  }
+
+  .kpi-compacto .value-box-value {
+    font-size: 23px !important;
+  }
+
+
+  /* -------------------------------------------------------
+     GRÁFICO CIRCULAR
+     ------------------------------------------------------- */
+
+  .grafico-cuadrado {
+    width: min(100%, 380px) !important;
+
+    aspect-ratio: 1 / 1 !important;
+
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .grafico-cuadrado .shiny-plot-output {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+
+  /* -------------------------------------------------------
+     TABLAS
+     ------------------------------------------------------- */
+
+  .dataTables_wrapper {
+    width: 100% !important;
+
+    overflow-x: auto !important;
+  }
+
+  table.dataTable {
+    width: 100% !important;
+
+    font-size: 12px !important;
+  }
+
+  table.dataTable th,
+  table.dataTable td {
+    padding: 6px 5px !important;
+  }
+
+
+  /* -------------------------------------------------------
+     SELECTORES Y BOTONES
+     ------------------------------------------------------- */
+
+  .form-select,
+  .form-control,
+  .selectize-input,
+  button {
+    font-size: 14px !important;
+  }
+
+
+  /* -------------------------------------------------------
+     ENCABEZADOS DE TARJETAS
+     ------------------------------------------------------- */
+
+  .card-header {
+    font-size: 14px !important;
+  }
+}
+
+/* =========================================================
+   ENCABEZADO PRINCIPAL DEL DASHBOARD
+   ========================================================= */
+
+.navbar {
+  background: linear-gradient(
+    90deg,
+    #F8FAFB 0%,
+    #EEF2F4 100%
+  ) !important;
+
+  border-bottom: 1px solid #C8D1D6 !important;
+
+  box-shadow:
+    0 2px 7px rgba(0, 0, 0, 0.08) !important;
+
+  min-height: 58px !important;
+}
+
+
+/* =========================================================
+   TÍTULO PRINCIPAL
+   ========================================================= */
+
+.navbar-brand,
+.navbar-title {
+  font-family: "Times New Roman", Times, serif !important;
+
+  font-size: clamp(
+    17px,
+    1.15vw,
+    21px
+  ) !important;
+
+  font-weight: 700 !important;
+
+  letter-spacing: 0.6px !important;
+
+  color: #304955 !important;
+
+  border-left: 4px solid #3F5968 !important;
+
+  padding-left: 12px !important;
+
+  line-height: 1.15 !important;
+}
+
 
 /* =========================================================
    GRÁFICOS RESPONSIVOS Y CUADRADOS
