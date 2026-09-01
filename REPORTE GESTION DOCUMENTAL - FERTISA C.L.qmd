@@ -379,46 +379,17 @@ options(shiny.useragg = TRUE)
 # BASE INICIAL DEL DASHBOARD
 # =========================================================
 
-# Base que viajará junto con el dashboard
 ruta_rds <- "datos/Base.rds"
 
-# Base original que actualmente tienes en tu computadora
-ruta_rds_local <- paste0(
-  "C:/Users/User/OneDrive - FAVORITA/",
-  "Escritorio/datos/Base.rds"
-)
-
-# Crear carpeta datos junto al QMD si todavía no existe
-dir.create(
-  "datos",
-  showWarnings = FALSE
-)
-
-# Si todavía no existe la base portable,
-# copiar automáticamente la base original
-if (
-  !file.exists(ruta_rds) &&
-  file.exists(ruta_rds_local)
-) {
-  
-  file.copy(
-    from = ruta_rds_local,
-    to = ruta_rds,
-    overwrite = TRUE
-  )
-}
-
-# Comprobación final
 if (!file.exists(ruta_rds)) {
   stop(
     paste0(
-      "No se encontró Base.rds ni en la carpeta del proyecto ",
-      "ni en la ubicación original."
+      "No se encontró la base de datos: ",
+      ruta_rds
     )
   )
 }
 
-# Cargar y limpiar la base
 datos_iniciales <- readRDS(ruta_rds) |>
   mutate(
     across(
@@ -438,154 +409,13 @@ datos_iniciales <- readRDS(ruta_rds) |>
       trimws(TIENE_DOCUMENTO)
     )
   ) |>
+  
   filter(
     TIENE_DOCUMENTO %in% c(
       "SI",
       "NO"
     )
   )
-
-# =========================================================
-# FUNCIÓN: LEER Y TRANSFORMAR EL EXCEL
-# =========================================================
-
-
-
-cargar_datos <- function() {
-  
-  if (!file.exists(ruta_excel)) {
-    stop("No se encontró el archivo Reporte.xlsx")
-  }
-  
-  Reporte <- read_excel(ruta_excel)
-  
-  columnas_id <- c(
-    "DEPARTAMENTO",
-    "PROVEEDOR"
-  )
-  
-  # Excluir variables
-  Reporte <- Reporte |>
-    select(
-      -all_of(
-        c(
-          "EMITIDOS",
-          "SIN EMITIR",
-          "...23",
-          "CUMPLIMIENTO(%)"
-        )
-      )
-    )
-  
-  # Transformación a formato largo
-  Base <- Reporte |>
-    mutate(
-      across(
-        .cols = -all_of(columnas_id),
-        .fns = as.character
-      )
-    ) |>
-    
-    pivot_longer(
-      cols = -all_of(columnas_id),
-      names_to = "DOCUMENTO",
-      values_to = "VALOR_ORIGINAL"
-    ) |>
-    
-    mutate(
-      VALOR_LIMPIO = str_to_upper(
-        str_squish(VALOR_ORIGINAL)
-      )
-    ) |>
-    
-    # Excluir documentos que no aplican
-    filter(
-      !is.na(VALOR_LIMPIO),
-      !(VALOR_LIMPIO %in% c(
-        "NA",
-        "N/A",
-        "NO APLICA",
-        ""
-      ))
-    ) |>
-    
-    mutate(
-      TIENE_DOCUMENTO = case_when(
-        VALOR_LIMPIO %in% c(
-          "VERDADERO",
-          "TRUE",
-          "SI",
-          "SÍ",
-          "1"
-        ) ~ "SI",
-        
-        VALOR_LIMPIO %in% c(
-          "FALSO",
-          "FALSE",
-          "NO",
-          "0"
-        ) ~ "NO",
-        
-        TRUE ~ NA_character_
-      ),
-      
-      ESTADO = case_when(
-        TIENE_DOCUMENTO == "SI" ~ "EMITIDO",
-        TIENE_DOCUMENTO == "NO" ~ "PENDIENTE",
-        TRUE ~ "REVISAR VALOR"
-      )
-    ) |>
-    
-    select(
-      DEPARTAMENTO,
-      PROVEEDOR,
-      DOCUMENTO,
-      TIENE_DOCUMENTO,
-      ESTADO
-    ) |>
-    
-    mutate(
-      across(
-        everything(),
-        as.character
-      ),
-      TIENE_DOCUMENTO = toupper(
-        trimws(TIENE_DOCUMENTO)
-      )
-    ) |>
-    
-    filter(
-      TIENE_DOCUMENTO %in% c(
-        "SI",
-        "NO"
-      )
-    )
-  
-  # =======================================================
-  # GUARDAR COPIA RDS
-  # =======================================================
-  
-  dir.create(
-    dirname(ruta_rds),
-    showWarnings = FALSE,
-    recursive = TRUE
-  )
-  
-  saveRDS(
-    Base,
-    ruta_rds
-  )
-  
-  return(Base)
-}
-
-
-# =========================================================
-# CARGA INICIAL DEL DASHBOARD
-# =========================================================
-
-datos_iniciales <- cargar_datos()
-
 
 # =========================================================
 # VALIDACIÓN
@@ -914,7 +744,7 @@ output$grafico_departamento <- renderPlot(
       )
     ) +
     labs(
-      title = "title = titulo_proveedor",
+      title = titulo_proveedor,
       fill = NULL
     ) +
     theme_void(base_family = "Times New Roman") +
