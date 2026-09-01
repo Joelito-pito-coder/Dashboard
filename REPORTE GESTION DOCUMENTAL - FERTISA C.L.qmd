@@ -367,11 +367,7 @@ library(dplyr)
 library(ggplot2)
 library(DT)
 library(bslib)
-library(readxl)
-library(tidyr)
-library(stringr)
-library(ragg)
-library(rsconnect)
+
 
 options(shiny.useragg = TRUE)
 
