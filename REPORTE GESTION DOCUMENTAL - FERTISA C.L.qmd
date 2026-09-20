@@ -3,7 +3,6 @@ title: "REPORTE DE GESTIÓN DOCUMENTAL"
 format:
   dashboard:
     theme: cosmo
-    orientation: columns
     scrolling: true
 server: shiny
 execute:
@@ -16,257 +15,14 @@ execute:
 <style>
 
 /* =========================================================
-   LOGO DEL SIDEBAR
+   FUENTE Y PALETA
    ========================================================= */
-
-.sidebar-logo-container {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  padding: 8px 10px 14px 10px;
-  margin-bottom: 5px;
-
-  border-bottom: 1px solid #D2D7DA;
-}
-
-.sidebar-logo {
-  width: 100%;
-  max-width: 170px;
-  height: auto;
-
-  object-fit: contain;
-  display: block;
-}
-
-
-/* =========================================================
-   DISEÑO RESPONSIVO - CELULARES
-   ========================================================= */
-
-@media (max-width: 768px) {
-
-  /* -------------------------------------------------------
-     ENCABEZADO
-     ------------------------------------------------------- */
-
-  .navbar {
-    min-height: 50px !important;
-  }
-
-  .navbar-brand,
-  .navbar-title {
-    font-size: 16px !important;
-    letter-spacing: 0.2px !important;
-    padding-left: 8px !important;
-  }
-
-
-  /* -------------------------------------------------------
-     SIDEBAR
-     ------------------------------------------------------- */
-
-  .sidebar {
-    width: 100% !important;
-    max-width: 100% !important;
-  }
-
-  .sidebar-controles {
-    height: auto !important;
-    min-height: auto !important;
-  }
-
-
-  /* -------------------------------------------------------
-     TARJETAS
-     ------------------------------------------------------- */
-
-  .card {
-    width: 100% !important;
-    max-width: 100% !important;
-
-    margin-bottom: 10px !important;
-  }
-
-
-  /* -------------------------------------------------------
-     KPI
-     ------------------------------------------------------- */
-
-  .kpi-compacto {
-    width: 100% !important;
-
-    height: auto !important;
-    max-height: none !important;
-  }
-
-  .kpi-compacto .bslib-grid {
-    width: 100% !important;
-
-    height: auto !important;
-    min-height: auto !important;
-
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr)) !important;
-
-    gap: 7px !important;
-  }
-
-  .kpi-compacto .bslib-value-box {
-    width: 100% !important;
-
-    height: 82px !important;
-    min-height: 82px !important;
-  }
-
-  .kpi-compacto .value-box-title {
-    font-size: 11px !important;
-  }
-
-  .kpi-compacto .value-box-value {
-    font-size: 23px !important;
-  }
-
-
-  /* -------------------------------------------------------
-     GRÁFICO CIRCULAR
-     ------------------------------------------------------- */
-
-  .grafico-cuadrado {
-    width: min(100%, 380px) !important;
-
-    aspect-ratio: 1 / 1 !important;
-
-    margin-left: auto !important;
-    margin-right: auto !important;
-  }
-
-  .grafico-cuadrado .shiny-plot-output {
-    width: 100% !important;
-    height: 100% !important;
-  }
-
-
-  /* -------------------------------------------------------
-     TABLAS
-     ------------------------------------------------------- */
-
-  .dataTables_wrapper {
-    width: 100% !important;
-
-    overflow-x: auto !important;
-  }
-
-  table.dataTable {
-    width: 100% !important;
-
-    font-size: 12px !important;
-  }
-
-  table.dataTable th,
-  table.dataTable td {
-    padding: 6px 5px !important;
-  }
-
-
-  /* -------------------------------------------------------
-     SELECTORES Y BOTONES
-     ------------------------------------------------------- */
-
-  .form-select,
-  .form-control,
-  .selectize-input,
-  button {
-    font-size: 14px !important;
-  }
-
-
-  /* -------------------------------------------------------
-     ENCABEZADOS DE TARJETAS
-     ------------------------------------------------------- */
-
-  .card-header {
-    font-size: 14px !important;
-  }
-}
-
-/* =========================================================
-   ENCABEZADO PRINCIPAL DEL DASHBOARD
-   ========================================================= */
-
-.navbar {
-  background: linear-gradient(
-    90deg,
-    #F8FAFB 0%,
-    #EEF2F4 100%
-  ) !important;
-
-  border-bottom: 1px solid #C8D1D6 !important;
-
-  box-shadow:
-    0 2px 7px rgba(0, 0, 0, 0.08) !important;
-
-  min-height: 58px !important;
-}
-
-
-/* =========================================================
-   TÍTULO PRINCIPAL
-   ========================================================= */
-
-.navbar-brand,
-.navbar-title {
+html, body, .quarto-dashboard, .card, .card-header, .card-body,
+.form-control, .form-select, .selectize-input, .selectize-dropdown,
+.input-group, label, button, .dataTables_wrapper,
+table.dataTable, table.dataTable th, table.dataTable td {
   font-family: "Times New Roman", Times, serif !important;
-
-  font-size: clamp(
-    17px,
-    1.15vw,
-    21px
-  ) !important;
-
-  font-weight: 700 !important;
-
-  letter-spacing: 0.6px !important;
-
-  color: #304955 !important;
-
-  border-left: 4px solid #3F5968 !important;
-
-  padding-left: 12px !important;
-
-  line-height: 1.15 !important;
 }
-
-
-/* =========================================================
-   GRÁFICOS RESPONSIVOS Y CUADRADOS
-   ========================================================= */
-
-.grafico-cuadrado {
-  width: 100% !important;
-  max-width: 100% !important;
-
-  aspect-ratio: 1 / 1;
-
-  margin-left: auto !important;
-  margin-right: auto !important;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.grafico-cuadrado .shiny-plot-output {
-  width: 100% !important;
-  height: 100% !important;
-  max-width: 100% !important;
-  max-height: 100% !important;
-}
-
-/* =========================================================
-   PALETA GENERAL
-   ========================================================= */
 
 :root {
   --fertisa-azul: #3F5968;
@@ -275,320 +31,209 @@ execute:
   --fertisa-lila: #B39ABB;
   --fertisa-fondo: #F2F2F2;
   --fertisa-blanco: #FFFFFF;
-  --fertisa-sombra: rgba(0, 0, 0, 0.16);
 }
 
+html, body { background-color: var(--fertisa-fondo) !important; }
 
 /* =========================================================
-   FONDO GENERAL DEL DASHBOARD
+   ENCABEZADO
    ========================================================= */
+.navbar {
+  background: linear-gradient(90deg, #F8FAFB 0%, #EEF2F4 100%) !important;
+  border-bottom: 1px solid #C8D1D6 !important;
+  box-shadow: 0 2px 7px rgba(0,0,0,.08) !important;
+  min-height: 58px !important;
+}
 
-html,
-body {
-  background-color: var(--fertisa-fondo) !important;
+.navbar-brand, .navbar-title {
   font-family: "Times New Roman", Times, serif !important;
+  font-size: clamp(17px, 1.15vw, 21px) !important;
+  font-weight: 700 !important;
+  letter-spacing: .6px !important;
+  color: #304955 !important;
+  border-left: 4px solid var(--fertisa-azul) !important;
+  padding-left: 12px !important;
+  line-height: 1.15 !important;
 }
-
-
-/* =========================================================
-   TARJETAS NORMALES
-   NO AFECTAR LOS KPI
-   ========================================================= */
-
-.card:not(.bslib-value-box) {
-  background-color: var(--fertisa-blanco) !important;
-
-  border: 1px solid #D2D7DA !important;
-  border-radius: 6px !important;
-
-  box-shadow:
-    0 3px 8px rgba(0, 0, 0, 0.14) !important;
-
-  overflow: hidden !important;
-}
-
-
-/* =========================================================
-   ENCABEZADOS DE TARJETAS NORMALES
-   ========================================================= */
-
-.card:not(.bslib-value-box) > .card-header {
-  background-color: var(--fertisa-gris-azul) !important;
-  color: #1F1F1F !important;
-
-  font-family: "Times New Roman", Times, serif !important;
-  font-weight: bold !important;
-
-  border-bottom: 1px solid #8799A2 !important;
-
-  padding-top: 7px !important;
-  padding-bottom: 7px !important;
-}
-
 
 /* =========================================================
    SIDEBAR
    ========================================================= */
-
 .sidebar {
   background-color: #ECEFF1 !important;
-
   border-right: 1px solid #C6CDD1 !important;
-
-  box-shadow:
-    3px 0 8px rgba(0, 0, 0, 0.10) !important;
+  box-shadow: 3px 0 8px rgba(0,0,0,.10) !important;
 }
-
-
-/* =========================================================
-   SELECTORES
-   ========================================================= */
-
-.form-select,
-.form-control,
-.selectize-input {
+.sidebar-logo-container {
+  width: 100%; display: flex; justify-content: center; align-items: center;
+  padding: 8px 10px 14px; margin-bottom: 5px;
+  border-bottom: 1px solid #D2D7DA;
+}
+.sidebar-logo { width: 100%; max-width: 170px; height: auto; object-fit: contain; display: block; }
+.form-select, .form-control, .selectize-input {
   background-color: #FFFFFF !important;
-
   border: 1px solid #AEBBC2 !important;
   border-radius: 4px !important;
-
-  box-shadow:
-    inset 0 1px 2px rgba(0, 0, 0, 0.04) !important;
-
-  font-family: "Times New Roman", Times, serif !important;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.04) !important;
 }
-
-
-/* =========================================================
-   BOTÓN LIMPIAR FILTROS
-   ========================================================= */
-
 #limpiar_filtros {
-  background-color: #FFFFFF !important;
-  color: var(--fertisa-azul) !important;
-
-  border: 1px solid var(--fertisa-azul) !important;
-  border-radius: 4px !important;
-
-  box-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.10) !important;
-
-  font-family: "Times New Roman", Times, serif !important;
+  background-color: #FFFFFF !important; color: var(--fertisa-azul) !important;
+  border: 1px solid var(--fertisa-azul) !important; border-radius: 4px !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,.10) !important;
 }
-
-#limpiar_filtros:hover {
-  background-color: #E8EDF0 !important;
-}
-
-
-
+#limpiar_filtros:hover { background-color: #E8EDF0 !important; }
 
 /* =========================================================
-   TABLAS
+   ESTRUCTURA VISUAL
+   Todo el cuerpo está dentro de UNA sola Column de Quarto.
+   La distribución se controla con CSS Grid para que el
+   glosario sea una fila real debajo de todo lo anterior.
    ========================================================= */
-
-table.dataTable {
-  background-color: #FFFFFF !important;
-
-  font-family: "Times New Roman", Times, serif !important;
+.dashboard-shell {
+  width: 100% !important;
+  max-width: 100% !important;
+  display: grid !important;
+  grid-template-columns: minmax(185px, .72fr) minmax(320px, 1.15fr) minmax(430px, 1.55fr) !important;
+  grid-template-rows: 365px 410px auto !important;
+  grid-template-areas:
+    "kpis grafico detalle"
+    "documentos documentos detalle"
+    "glosario glosario glosario" !important;
+  gap: 10px !important;
+  padding: 4px !important;
+  box-sizing: border-box !important;
+  align-items: stretch !important;
 }
 
-
-table.dataTable thead th {
-  background-color: #EEF1F3 !important;
-  color: #222222 !important;
-
-  font-family: "Times New Roman", Times, serif !important;
-  font-weight: bold !important;
-
-  border-bottom: 1px solid #AEBBC2 !important;
+.area-kpis, .area-grafico, .area-detalle, .area-documentos, .area-glosario {
+  min-width: 0 !important;
+  min-height: 0 !important;
 }
-
-
-table.dataTable tbody td {
-  font-family: "Times New Roman", Times, serif !important;
-}
-
-
-table.dataTable tbody tr:nth-child(even) {
-  background-color: #F6F7F8 !important;
-}
-
-
-table.dataTable tbody tr:hover {
-  background-color: #E4EAED !important;
-}
-
+.area-kpis { grid-area: kpis !important; }
+.area-grafico { grid-area: grafico !important; }
+.area-detalle { grid-area: detalle !important; }
+.area-documentos { grid-area: documentos !important; }
+.area-glosario { grid-area: glosario !important; }
 
 /* =========================================================
-   KPI - CONTENEDOR GENERAL
+   TARJETAS
    ========================================================= */
-
-.kpi-compacto {
-  height: 346px !important;
-  max-height: 346px !important;
-
-  margin: 0 !important;
-  padding: 0 !important;
-
-  align-self: flex-start !important;
-}
-
-
-/* =========================================================
-   GRID DE LOS KPI
-   ========================================================= */
-
-.kpi-compacto .bslib-grid {
-  height: 346px !important;
-  min-height: 346px !important;
-
-  grid-template-columns: minmax(0, 1fr) !important;
-
-  align-content: start !important;
-
-  gap: 6px !important;
-}
-
-
-/* =========================================================
-   TODOS LOS KPI
-   ========================================================= */
-
-.kpi-compacto .bslib-value-box {
-  height: 82px !important;
-  min-height: 82px !important;
-
-  margin: 0 !important;
-
-  border: none !important;
-  border-radius: 5px !important;
-
-  box-shadow:
-    0 3px 7px rgba(0, 0, 0, 0.16) !important;
-
+.dashboard-shell .card {
+  width: 100% !important; max-width: 100% !important; height: 100% !important;
+  min-width: 0 !important; min-height: 0 !important;
+  background: var(--fertisa-blanco) !important;
+  border: 1px solid #D2D7DA !important; border-radius: 6px !important;
+  box-shadow: 0 3px 8px rgba(0,0,0,.14) !important;
   overflow: hidden !important;
-
-  color: #FFFFFF !important;
 }
-
+.dashboard-shell .card-header {
+  background: var(--fertisa-gris-azul) !important; color: #1F1F1F !important;
+  font-weight: bold !important; border-bottom: 1px solid #8799A2 !important;
+  padding: 7px 10px !important; min-height: 36px !important;
+}
+.dashboard-shell .card-body { min-width: 0 !important; min-height: 0 !important; overflow: hidden !important; }
 
 /* =========================================================
-   KPI 1 - PORCENTAJE GENERAL
+   KPI
    ========================================================= */
-
-.kpi-compacto .bslib-value-box:nth-child(1) {
-  background: #3F5968 !important;
-  background-color: #3F5968 !important;
+.kpi-compacto {
+  width: 100% !important; height: 100% !important; min-height: 0 !important;
+  display: grid !important; grid-template-rows: repeat(4, 82px) !important; gap: 6px !important;
 }
-
-
-/* =========================================================
-   KPI 2 - PORCENTAJE POR DEPARTAMENTO
-   ========================================================= */
-
-.kpi-compacto .bslib-value-box:nth-child(2) {
-  background: #B39ABB !important;
-  background-color: #B39ABB !important;
+.kpi-compacto .bslib-value-box {
+  width: 100% !important; height: 82px !important; min-height: 82px !important;
+  margin: 0 !important; border: none !important; border-radius: 5px !important;
+  box-shadow: 0 3px 7px rgba(0,0,0,.16) !important; overflow: hidden !important; color: #FFF !important;
 }
-
-
-/* =========================================================
-   KPI 3 - PORCENTAJE POR PROVEEDOR
-   ========================================================= */
-
-.kpi-compacto .bslib-value-box:nth-child(3) {
-  background: #78909C !important;
-  background-color: #78909C !important;
-}
-
-
-/* =========================================================
-   KPI 4 - DOCUMENTOS PENDIENTES
-   ========================================================= */
-
-.kpi-compacto .bslib-value-box:nth-child(4) {
-  background: #667C88 !important;
-  background-color: #667C88 !important;
-}
-
-
-/* =========================================================
-   INTERIOR DE LOS KPI
-   IMPORTANTE: NO DEJAR FONDOS BLANCOS INTERNOS
-   ========================================================= */
-
+.kpi-compacto .bslib-value-box:nth-child(1) { background:#3F5968 !important; }
+.kpi-compacto .bslib-value-box:nth-child(2) { background:#B39ABB !important; }
+.kpi-compacto .bslib-value-box:nth-child(3) { background:#78909C !important; }
+.kpi-compacto .bslib-value-box:nth-child(4) { background:#667C88 !important; }
 .kpi-compacto .bslib-value-box .value-box-area,
-.kpi-compacto .bslib-value-box .card-body {
-  background: transparent !important;
-  background-color: transparent !important;
-}
-
-
-/* =========================================================
-   TÍTULO DE LOS KPI
-   ========================================================= */
-
-.kpi-compacto .value-box-title {
-  font-family: "Times New Roman", Times, serif !important;
-
-  font-size: 13px !important;
-  line-height: 1.05 !important;
-
-  color: #FFFFFF !important;
-}
-
-
-/* =========================================================
-   VALOR DE LOS KPI
-   ========================================================= */
-
-.kpi-compacto .value-box-value {
-  font-family: "Times New Roman", Times, serif !important;
-
-  font-size: 27px !important;
-  line-height: 1 !important;
-
-  color: #FFFFFF !important;
-}
-
-
-/* =========================================================
-   TEXTO GENERADO POR SHINY DENTRO DE KPI
-   ========================================================= */
-
+.kpi-compacto .bslib-value-box .card-body { background:transparent !important; }
+.kpi-compacto .value-box-title { font-size:13px !important; line-height:1.05 !important; color:#FFF !important; }
+.kpi-compacto .value-box-value { font-size:27px !important; line-height:1 !important; color:#FFF !important; }
 .kpi-compacto .bslib-value-box span,
 .kpi-compacto .bslib-value-box p,
-.kpi-compacto .bslib-value-box .shiny-text-output {
-  color: #FFFFFF !important;
-
-  font-family: "Times New Roman", Times, serif !important;
-}
-
+.kpi-compacto .bslib-value-box .shiny-text-output { color:#FFF !important; }
 
 /* =========================================================
-   FUENTE GLOBAL
+   GRÁFICO
    ========================================================= */
-
-.quarto-dashboard,
-.card,
-.card-header,
-.card-body,
-.form-control,
-.form-select,
-.selectize-input,
-.selectize-dropdown,
-.input-group,
-label,
-button,
-.dataTables_wrapper {
-  font-family: "Times New Roman", Times, serif !important;
+.area-grafico .card-body { padding: 4px !important; display:flex !important; align-items:center !important; justify-content:center !important; }
+.grafico-cuadrado {
+  width: min(100%, 365px) !important; aspect-ratio: 1/1 !important;
+  margin: auto !important; display:flex !important; align-items:center !important; justify-content:center !important;
 }
+.grafico-cuadrado .shiny-plot-output { width:100% !important; height:100% !important; max-width:100% !important; max-height:100% !important; }
 
+/* =========================================================
+   TABLAS SIN SCROLL HORIZONTAL
+   ========================================================= */
+.dataTables_wrapper { width:100% !important; max-width:100% !important; overflow-x:hidden !important; }
+.dataTables_scroll, .dataTables_scrollBody { width:100% !important; max-width:100% !important; }
+.dataTables_scrollBody { overflow-x:hidden !important; }
+table.dataTable {
+  width:100% !important; max-width:100% !important; table-layout:fixed !important;
+  background:#FFFFFF !important;
+}
+table.dataTable thead th {
+  background:#EEF1F3 !important; color:#222 !important; font-weight:bold !important;
+  border-bottom:1px solid #AEBBC2 !important; white-space:normal !important;
+  overflow-wrap:anywhere !important; word-break:break-word !important;
+}
+table.dataTable tbody td {
+  white-space:normal !important; overflow-wrap:anywhere !important; word-break:break-word !important;
+}
+table.dataTable tbody tr:nth-child(even) { background:#F6F7F8 !important; }
+table.dataTable tbody tr:hover { background:#E4EAED !important; }
+.area-documentos .card-body, .area-detalle .card-body { padding:7px !important; }
+
+/* =========================================================
+   GLOSARIO
+   ========================================================= */
+.area-glosario .card-body { padding:10px 12px !important; overflow:visible !important; }
+.glosario-grid {
+  width:100% !important; display:grid !important;
+  grid-template-columns:repeat(3, minmax(0,1fr)) !important;
+  column-gap:28px !important; row-gap:9px !important;
+}
+.glosario-item {
+  min-width:0 !important; font-size:13px !important; line-height:1.2 !important;
+  overflow-wrap:anywhere !important; word-break:break-word !important;
+}
+.glosario-item strong { font-weight:bold !important; }
+
+/* =========================================================
+   RESPONSIVO
+   ========================================================= */
+@media (max-width: 1150px) {
+  .dashboard-shell {
+    grid-template-columns:minmax(180px,.75fr) minmax(320px,1.25fr) !important;
+    grid-template-rows:350px 500px 500px auto !important;
+    grid-template-areas:
+      "kpis grafico"
+      "detalle detalle"
+      "documentos documentos"
+      "glosario glosario" !important;
+  }
+}
+@media (max-width: 850px) {
+  .dashboard-shell {
+    grid-template-columns:1fr !important;
+    grid-template-rows:auto 390px 500px 500px auto !important;
+    grid-template-areas:"kpis" "grafico" "detalle" "documentos" "glosario" !important;
+  }
+}
+@media (max-width: 600px) {
+  .navbar { min-height:50px !important; }
+  .navbar-brand, .navbar-title { font-size:16px !important; padding-left:8px !important; }
+  .glosario-grid { grid-template-columns:1fr !important; }
+  table.dataTable { font-size:12px !important; }
+  table.dataTable th, table.dataTable td { padding:6px 5px !important; }
+}
 </style>
 ```
-
-------------------------------------------------------------------------
 
 ```{r}
 #| context: setup
@@ -599,20 +244,38 @@ library(ggplot2)
 library(DT)
 library(bslib)
 
-
 options(shiny.useragg = TRUE)
 
 # =========================================================
-# BASE INICIAL DEL DASHBOARD
+# BASE DE DATOS
 # =========================================================
 
-ruta_rds <- "datos/Base.rds"
+# Se busca primero junto al QMD y, como respaldo, desde getwd().
+directorio_qmd <- tryCatch(
+  knitr::current_input(dir = TRUE),
+  error = function(e) ""
+)
+
+if (is.null(directorio_qmd) || !nzchar(directorio_qmd)) {
+  directorio_qmd <- getwd()
+}
+
+ruta_rds <- file.path(directorio_qmd, "datos", "Base.rds")
+
+if (!file.exists(ruta_rds)) {
+  ruta_alternativa <- file.path(getwd(), "datos", "Base.rds")
+  if (file.exists(ruta_alternativa)) {
+    ruta_rds <- ruta_alternativa
+  }
+}
 
 if (!file.exists(ruta_rds)) {
   stop(
     paste0(
-      "No se encontró la base de datos: ",
-      ruta_rds
+      "No se encontró la base de datos.\n\n",
+      "Se buscó en:\n", ruta_rds, "\n\n",
+      "La estructura esperada es:\n",
+      "[carpeta del QMD]/datos/Base.rds"
     )
   )
 }
@@ -620,119 +283,264 @@ if (!file.exists(ruta_rds)) {
 datos_iniciales <- readRDS(ruta_rds) |>
   mutate(
     across(
-      any_of(
-        c(
-          "DEPARTAMENTO",
-          "PROVEEDOR",
-          "DOCUMENTO",
-          "TIENE_DOCUMENTO",
-          "ESTADO"
-        )
-      ),
+      any_of(c("DEPARTAMENTO","PROVEEDOR","DOCUMENTO","TIENE_DOCUMENTO","ESTADO")),
       as.character
     ),
-    
-    TIENE_DOCUMENTO = toupper(
-      trimws(TIENE_DOCUMENTO)
-    )
+    TIENE_DOCUMENTO = toupper(trimws(TIENE_DOCUMENTO))
   ) |>
-  
-  filter(
-    TIENE_DOCUMENTO %in% c(
-      "SI",
-      "NO"
-    )
-  )
-
-# =========================================================
-# VALIDACIÓN
-# =========================================================
+  filter(TIENE_DOCUMENTO %in% c("SI","NO"))
 
 columnas_obligatorias <- c(
-  "DEPARTAMENTO",
-  "PROVEEDOR",
-  "DOCUMENTO",
-  "TIENE_DOCUMENTO",
-  "ESTADO"
+  "DEPARTAMENTO","PROVEEDOR","DOCUMENTO","TIENE_DOCUMENTO","ESTADO"
 )
 
-columnas_faltantes <- setdiff(
-  columnas_obligatorias,
-  names(datos_iniciales)
-)
+columnas_faltantes <- setdiff(columnas_obligatorias, names(datos_iniciales))
 
 if (length(columnas_faltantes) > 0) {
   stop(
     paste(
       "Faltan estas columnas:",
-      paste(
-        columnas_faltantes,
-        collapse = ", "
-      )
+      paste(columnas_faltantes, collapse = ", ")
     )
   )
 }
 ```
 
+## Interacciones {.sidebar}
+
+```{r}
+shiny::div(
+  class = "sidebar-controles",
+
+  shiny::div(
+    class = "sidebar-logo-container",
+    shiny::tags$img(
+      src = "https://terminalfertisa.com/tf_content/wp-content/uploads/2021/05/cropped-cropped-logo-1.png",
+      alt = "Terminal Fertisa",
+      class = "sidebar-logo"
+    )
+  ),
+
+  selectInput(
+    inputId = "departamento",
+    label = "Departamento:",
+    choices = c(
+      "TODOS",
+      sort(unique(na.omit(datos_iniciales$DEPARTAMENTO)))
+    ),
+    selected = "TODOS"
+  ),
+
+  uiOutput("filtro_proveedor"),
+
+  actionButton(
+    inputId = "limpiar_filtros",
+    label = "Limpiar filtros",
+    icon = icon("eraser"),
+    class = "btn-outline-secondary",
+    width = "100%"
+  )
+)
+```
+
+## Column
+
+```{r}
+#| echo: false
+
+shiny::div(
+  class = "dashboard-shell",
+
+  # =======================================================
+  # KPI
+  # =======================================================
+  shiny::div(
+    class = "area-kpis",
+
+    shiny::div(
+      class = "kpi-compacto",
+
+      bslib::value_box(
+        title = "Porcentaje general",
+        value = shiny::textOutput("kpi_general"),
+        theme = "primary",
+        height = "82px"
+      ),
+
+      bslib::value_box(
+        title = "Porcentaje por departamento",
+        value = shiny::textOutput("kpi_departamento"),
+        theme = "purple",
+        height = "82px"
+      ),
+
+      bslib::value_box(
+        title = "Porcentaje por proveedor",
+        value = shiny::textOutput("kpi_proveedor"),
+        theme = "success",
+        height = "82px"
+      ),
+
+      bslib::value_box(
+        title = "Documentos pendientes",
+        value = shiny::textOutput("kpi_pendientes"),
+        theme = "danger",
+        height = "82px"
+      )
+    )
+  ),
+
+  # =======================================================
+  # GRAFICO
+  # =======================================================
+  shiny::div(
+    class = "area-grafico",
+
+    bslib::card(
+      bslib::card_header("Cumplimiento Documental por proveedor"),
+      bslib::card_body(
+        fill = TRUE,
+        shiny::div(
+          class = "grafico-cuadrado",
+          shiny::plotOutput(
+            "grafico_departamento",
+            width = "100%",
+            height = "100%"
+          )
+        )
+      )
+    )
+  ),
+
+  # =======================================================
+  # DETALLE DOCUMENTAL
+  # =======================================================
+  shiny::div(
+    class = "area-detalle",
+
+    bslib::card(
+      bslib::card_header("Detalle documental"),
+      bslib::card_body(
+        fill = TRUE,
+        DT::DTOutput(
+          "tabla_detalle",
+          height = "100%"
+        )
+      )
+    )
+  ),
+
+  # =======================================================
+  # CUMPLIMIENTO POR DOCUMENTO
+  # =======================================================
+  shiny::div(
+    class = "area-documentos",
+
+    bslib::card(
+      bslib::card_header("Cumplimiento por documento"),
+      bslib::card_body(
+        fill = TRUE,
+        DT::DTOutput(
+          "tabla_documentos",
+          height = "100%"
+        )
+      )
+    )
+  ),
+
+  # =======================================================
+  # GLOSARIO: FILA INFERIOR COMPLETA
+  # =======================================================
+  shiny::div(
+    class = "area-glosario",
+
+    bslib::card(
+      bslib::card_header("Glosario de abreviaturas"),
+      bslib::card_body(
+        shiny::div(
+          class = "glosario-grid",
+
+          shiny::div(class = "glosario-item", shiny::strong("RUC: "), "Registro Único de Contribuyentes"),
+          shiny::div(class = "glosario-item", shiny::strong("MP: "), "Matrícula portuaria"),
+          shiny::div(class = "glosario-item", shiny::strong("NL: "), "Nombramiento del representante legal"),
+
+          shiny::div(class = "glosario-item", shiny::strong("CI: "), "Cédula de Identidad"),
+          shiny::div(class = "glosario-item", shiny::strong("SC: "), "CCO Superintendencia de Compañías"),
+          shiny::div(class = "glosario-item", shiny::strong("IESS: "), "CCO IESS"),
+
+          shiny::div(class = "glosario-item", shiny::strong("SRI: "), "CCO SRI"),
+          shiny::div(class = "glosario-item", shiny::strong("BASC: "), "Certificado BASC"),
+          shiny::div(class = "glosario-item", shiny::strong("UAFE: "), "Certificado de la UAFE"),
+
+          shiny::div(class = "glosario-item", shiny::strong("AP: "), "Certificado de antecedentes penales"),
+          shiny::div(class = "glosario-item", shiny::strong("CF: "), "Certificado Bancario"),
+          shiny::div(class = "glosario-item", shiny::strong("BC: "), "Buró Crediticio"),
+
+          shiny::div(class = "glosario-item", shiny::strong("RC: "), "Póliza de responsabilidad civil"),
+          shiny::div(class = "glosario-item", shiny::strong("DCI: "), "Declaración de conflicto de interés"),
+          shiny::div(class = "glosario-item", shiny::strong("MPA: "), "Matrícula portuaria actual"),
+
+          shiny::div(class = "glosario-item", shiny::strong("CC: "), "Póliza de cumplimiento de contrato"),
+          shiny::div(class = "glosario-item", shiny::strong("BUA: "), "Póliza de buen uso de anticipo"),
+          shiny::div(class = "glosario-item", shiny::strong("CON: "), "Contratos"),
+
+          shiny::div(class = "glosario-item", shiny::strong("SEG: "), "Póliza de seguro de vida, accidentes y gastos médicos")
+        )
+      )
+    )
+  )
+)
+```
+
 ```{r, context="server"}
 
-library(shiny)
-library(dplyr)
-library(ggplot2)
-library(DT)
-
 # =========================================================
-# 1. CARGAR Y LIMPIAR LA BASE
+# DATOS REACTIVOS
 # =========================================================
 
-datos <- reactiveVal(
-  datos_iniciales
-)
+datos <- reactiveVal(datos_iniciales)
 
 # =========================================================
 # LIMPIAR FILTROS
 # =========================================================
 
 observeEvent(input$limpiar_filtros, {
-  
+
   updateSelectInput(
     session,
     inputId = "departamento",
     selected = "TODOS"
   )
-  
+
   updateSelectInput(
     session,
     inputId = "proveedor",
     selected = "TODOS"
   )
-  
 })
 
-
 # =========================================================
-# 2. FUNCIONES AUXILIARES
+# FUNCIONES AUXILIARES
 # =========================================================
 
 calcular_porcentaje <- function(base) {
-  
+
   if (nrow(base) == 0) {
     return(NA_real_)
   }
-  
+
   mean(
     base$TIENE_DOCUMENTO == "SI",
     na.rm = TRUE
   )
 }
 
-
 mostrar_porcentaje <- function(valor) {
-  
+
   if (is.na(valor)) {
     return("Sin información")
   }
-  
+
   paste0(
     format(
       round(valor * 100, 1),
@@ -744,25 +552,20 @@ mostrar_porcentaje <- function(valor) {
   )
 }
 
-
 # =========================================================
-# 3. FILTRO REACTIVO DE PROVEEDORES
+# PROVEEDOR REACTIVO
 # =========================================================
 
 output$filtro_proveedor <- renderUI({
-  
+
   base_proveedores <- datos()
-  
-  if (
-    !is.null(input$departamento) &&
-    input$departamento != "TODOS"
-  ) {
+
+  if (!is.null(input$departamento) && input$departamento != "TODOS") {
+
     base_proveedores <- base_proveedores |>
-      filter(
-        DEPARTAMENTO == input$departamento
-      )
+      filter(DEPARTAMENTO == input$departamento)
   }
-  
+
   proveedores_disponibles <- base_proveedores |>
     filter(
       !is.na(PROVEEDOR),
@@ -771,165 +574,126 @@ output$filtro_proveedor <- renderUI({
     distinct(PROVEEDOR) |>
     arrange(PROVEEDOR) |>
     pull(PROVEEDOR)
-  
+
   selectInput(
     inputId = "proveedor",
     label = "Proveedor:",
-    choices = c(
-      "TODOS",
-      proveedores_disponibles
-    ),
+    choices = c("TODOS", proveedores_disponibles),
     selected = "TODOS"
   )
 })
 
-
 # =========================================================
-# 4. datos(() FILTRADOS
+# BASE FILTRADA
 # =========================================================
 
 datos_filtrados <- reactive({
-  
+
   base_filtrada <- datos()
-  
-  if (
-    !is.null(input$departamento) &&
-    input$departamento != "TODOS"
-  ) {
+
+  if (!is.null(input$departamento) && input$departamento != "TODOS") {
+
     base_filtrada <- base_filtrada |>
-      filter(
-        DEPARTAMENTO == input$departamento
-      )
+      filter(DEPARTAMENTO == input$departamento)
   }
-  
-  if (
-    !is.null(input$proveedor) &&
-    input$proveedor != "TODOS"
-  ) {
+
+  if (!is.null(input$proveedor) && input$proveedor != "TODOS") {
+
     base_filtrada <- base_filtrada |>
-      filter(
-        PROVEEDOR == input$proveedor
-      )
+      filter(PROVEEDOR == input$proveedor)
   }
-  
+
   base_filtrada
 })
 
-
 # =========================================================
-# 5. KPI: PORCENTAJE GENERAL
-# No cambia con ningún filtro
+# KPI GENERAL
 # =========================================================
 
 output$kpi_general <- renderText({
-  
+
   mostrar_porcentaje(
     calcular_porcentaje(datos())
   )
 })
 
-
 # =========================================================
-# 6. KPI: PORCENTAJE POR DEPARTAMENTO
-# Cambia solo con el departamento
+# KPI DEPARTAMENTO
 # =========================================================
 
 output$kpi_departamento <- renderText({
-  
-  if (
-    is.null(input$departamento) ||
-    input$departamento == "TODOS"
-  ) {
+
+  if (is.null(input$departamento) || input$departamento == "TODOS") {
     return("Seleccione")
   }
-  
+
   base_departamento <- datos() |>
-    filter(
-      DEPARTAMENTO == input$departamento
-    )
-  
+    filter(DEPARTAMENTO == input$departamento)
+
   mostrar_porcentaje(
     calcular_porcentaje(base_departamento)
   )
 })
 
-
 # =========================================================
-# 7. KPI: PORCENTAJE POR PROVEEDOR
-# Cambia con el proveedor seleccionado
+# KPI PROVEEDOR
 # =========================================================
 
 output$kpi_proveedor <- renderText({
-  
-  if (
-    is.null(input$proveedor) ||
-    input$proveedor == "TODOS"
-  ) {
+
+  if (is.null(input$proveedor) || input$proveedor == "TODOS") {
     return("Seleccione")
   }
-  
+
   base_proveedor <- datos()
-  
-  if (
-    !is.null(input$departamento) &&
-    input$departamento != "TODOS"
-  ) {
+
+  if (!is.null(input$departamento) && input$departamento != "TODOS") {
+
     base_proveedor <- base_proveedor |>
-      filter(
-        DEPARTAMENTO == input$departamento
-      )
+      filter(DEPARTAMENTO == input$departamento)
   }
-  
+
   base_proveedor <- base_proveedor |>
-    filter(
-      PROVEEDOR == input$proveedor
-    )
-  
+    filter(PROVEEDOR == input$proveedor)
+
   mostrar_porcentaje(
     calcular_porcentaje(base_proveedor)
   )
 })
 
-
 # =========================================================
-# 8. KPI: DOCUMENTOS PENDIENTES
+# KPI PENDIENTES
 # =========================================================
 
 output$kpi_pendientes <- renderText({
-  
+
   base_actual <- datos_filtrados()
-  
+
   sum(
     base_actual$TIENE_DOCUMENTO == "NO",
     na.rm = TRUE
   )
 })
 
-
 # =========================================================
-# 9. GRÁFICO CIRCULAR POR PROVEEDOR
+# GRÁFICO CIRCULAR
 # =========================================================
 
-output$grafico_departamento <- renderPlot(
-  {
-  
+output$grafico_departamento <- renderPlot({
+
   base_grafico <- datos_filtrados()
-  
+
   validate(
     need(
       nrow(base_grafico) > 0,
       "No existen datos para la selección realizada"
     )
   )
-  
+
   resumen_circular <- base_grafico |>
-    count(
-      TIENE_DOCUMENTO,
-      name = "TOTAL"
-    ) |>
+    count(TIENE_DOCUMENTO, name = "TOTAL") |>
     mutate(
       PORCENTAJE = TOTAL / sum(TOTAL),
-      
       ETIQUETA = paste0(
         TOTAL,
         " (",
@@ -942,19 +706,15 @@ output$grafico_departamento <- renderPlot(
         "%)"
       )
     )
-  
+
   titulo_proveedor <- if (
-    is.null(input$proveedor) ||
-    input$proveedor == "TODOS"
+    is.null(input$proveedor) || input$proveedor == "TODOS"
   ) {
     "Todos los proveedores"
   } else {
-    paste(
-      "Proveedor:",
-      input$proveedor
-    )
+    paste("Proveedor:", input$proveedor)
   }
-  
+
   ggplot(
     resumen_circular,
     aes(
@@ -978,7 +738,7 @@ output$grafico_departamento <- renderPlot(
       color = "white",
       family = "Times New Roman",
       fontface = "bold",
-      size = 6,
+      size = 5.5,
       lineheight = 0.95
     ) +
     scale_fill_manual(
@@ -1000,68 +760,52 @@ output$grafico_departamento <- renderPlot(
       plot.title = element_text(
         family = "Times New Roman",
         face = "bold",
-        size = 17,
+        size = 15,
         hjust = 0.5,
-        margin = margin(b = 10)
+        margin = margin(b = 8)
       ),
       legend.position = "right",
       legend.text = element_text(
         family = "Times New Roman",
-        size = 12,
+        size = 11,
         face = "bold"
       ),
       legend.title = element_blank(),
-      legend.key.size = grid::unit(0.7, "cm")
+      legend.key.size = grid::unit(0.65, "cm")
     )
-  })
-
+})
 
 # =========================================================
-# 10. TABLA: CUMPLIMIENTO POR DOCUMENTO
-# Responde al departamento, pero no al proveedor
+# TABLA: CUMPLIMIENTO POR DOCUMENTO
 # =========================================================
 
 output$tabla_documentos <- DT::renderDT({
-  
+
   base_documentos <- datos()
-  
-  if (
-    !is.null(input$departamento) &&
-    input$departamento != "TODOS"
-  ) {
+
+  if (!is.null(input$departamento) && input$departamento != "TODOS") {
+
     base_documentos <- base_documentos |>
-      filter(
-        DEPARTAMENTO == input$departamento
-      )
+      filter(DEPARTAMENTO == input$departamento)
   }
-  
+
   validate(
     need(
       nrow(base_documentos) > 0,
       "No existen datos para el departamento seleccionado"
     )
   )
-  
+
   tabla_documentos <- base_documentos |>
     group_by(DOCUMENTO) |>
     summarise(
       Requeridos = n(),
-      
-      Presentados = sum(
-        TIENE_DOCUMENTO == "SI",
-        na.rm = TRUE
-      ),
-      
-      Pendientes = sum(
-        TIENE_DOCUMENTO == "NO",
-        na.rm = TRUE
-      ),
-      
+      Presentados = sum(TIENE_DOCUMENTO == "SI", na.rm = TRUE),
+      Pendientes = sum(TIENE_DOCUMENTO == "NO", na.rm = TRUE),
       .groups = "drop"
     ) |>
     mutate(
-      Cumplimiento_numerico =
-        Presentados / Requeridos
+      Cumplimiento_numerico = Presentados / Requeridos
     ) |>
     arrange(
       Cumplimiento_numerico,
@@ -1070,10 +814,7 @@ output$tabla_documentos <- DT::renderDT({
     mutate(
       Cumplimiento = paste0(
         format(
-          round(
-            Cumplimiento_numerico * 100,
-            1
-          ),
+          round(Cumplimiento_numerico * 100, 1),
           decimal.mark = ",",
           nsmall = 1,
           trim = TRUE
@@ -1081,9 +822,7 @@ output$tabla_documentos <- DT::renderDT({
         "%"
       )
     ) |>
-    rename(
-      Documento = DOCUMENTO
-    ) |>
+    rename(Documento = DOCUMENTO) |>
     select(
       Documento,
       Requeridos,
@@ -1091,44 +830,42 @@ output$tabla_documentos <- DT::renderDT({
       Pendientes,
       Cumplimiento
     )
-  
+
   DT::datatable(
     tabla_documentos,
     rownames = FALSE,
     filter = "top",
     fillContainer = TRUE,
-    
     options = list(
       paging = FALSE,
-      scrollX = TRUE,
+      scrollX = FALSE,
       scrollY = "300px",
-      scrollCollapse = FALSE,
-      autoWidth = TRUE,
+      scrollCollapse = TRUE,
+      autoWidth = FALSE,
       dom = "ft",
-      
       columnDefs = list(
-        list(
-          className = "dt-center",
-          targets = c(1, 2, 3, 4)
-        )
+        list(width = "38%", targets = 0),
+        list(width = "15.5%", targets = 1),
+        list(width = "15.5%", targets = 2),
+        list(width = "15.5%", targets = 3),
+        list(width = "15.5%", targets = 4),
+        list(className = "dt-center", targets = c(1,2,3,4)),
+        list(className = "dt-left", targets = 0)
       ),
-      
       language = list(
         search = "Buscar:",
         emptyTable = "No existen documentos"
       )
     )
   )
-  
 }, server = FALSE)
 
-
 # =========================================================
-# 11. TABLA: DETALLE DOCUMENTAL
+# TABLA: DETALLE DOCUMENTAL
 # =========================================================
 
 output$tabla_detalle <- DT::renderDT({
-  
+
   tabla_detalle <- datos_filtrados() |>
     arrange(
       DEPARTAMENTO,
@@ -1146,60 +883,34 @@ output$tabla_detalle <- DT::renderDT({
         )
       )
     )
-  
+
   validate(
     need(
       nrow(tabla_detalle) > 0,
       "No existen registros para la selección realizada"
     )
   )
-  
+
   DT::datatable(
     tabla_detalle,
     rownames = FALSE,
     filter = "top",
     fillContainer = TRUE,
-    
     options = list(
       pageLength = 15,
       lengthMenu = c(10, 15, 25, 50),
       scrollX = FALSE,
-      scrollY = "610px",
-      scrollCollapse = FALSE,
+      scrollY = "640px",
+      scrollCollapse = TRUE,
       autoWidth = FALSE,
-      
-      # Distribución del ancho de las 5 columnas
       columnDefs = list(
-        list(
-          width = "16%",
-          targets = 0
-        ),
-        list(
-          width = "24%",
-          targets = 1
-        ),
-        list(
-          width = "30%",
-          targets = 2
-        ),
-        list(
-          width = "15%",
-          targets = 3
-        ),
-        list(
-          width = "15%",
-          targets = 4
-        ),
-        # Centrar columnas cortas
-        list(
-          className = "dt-center",
-          targets = c(0, 3, 4)
-        ),
-        # Texto a la izquierda en columnas largas
-        list(
-          className = "dt-left",
-          targets = c(1, 2)
-        )
+        list(width = "16%", targets = 0),
+        list(width = "24%", targets = 1),
+        list(width = "30%", targets = 2),
+        list(width = "15%", targets = 3),
+        list(width = "15%", targets = 4),
+        list(className = "dt-center", targets = c(0,3,4)),
+        list(className = "dt-left", targets = c(1,2))
       ),
       language = list(
         search = "Buscar:",
@@ -1210,157 +921,6 @@ output$tabla_detalle <- DT::renderDT({
       )
     )
   )
-  
 }, server = FALSE)
-
 ```
 
-## Interacciones {.sidebar}
-
-```{r}
-
-shiny::div(
-  class = "sidebar-controles",
-  
-  # =========================================================
-  # LOGO FERTISA
-  # =========================================================
-  
-  shiny::div(
-    class = "sidebar-logo-container",
-    
-    shiny::tags$img(
-      src = "https://terminalfertisa.com/tf_content/wp-content/uploads/2021/05/cropped-cropped-logo-1.png",
-      alt = "Terminal Fertisa",
-      class = "sidebar-logo"
-    )
-  ),
-  
-  # =========================================================
-  # FILTRO DE DEPARTAMENTO
-  # =========================================================
-  
-  selectInput(
-    inputId = "departamento",
-    label = "Departamento:",
-    choices = c(
-      "TODOS",
-      sort(
-        unique(
-          na.omit(
-            datos_iniciales$DEPARTAMENTO
-          )
-        )
-      )
-    ),
-    selected = "TODOS"
-  ),
-  
-  # =========================================================
-  # FILTRO DE PROVEEDOR
-  # =========================================================
-  uiOutput("filtro_proveedor"),
-  
-  # =========================================================
-  # LIMPIAR FILTROS
-  # =========================================================
-  actionButton(
-    inputId = "limpiar_filtros",
-    label = "Limpiar filtros",
-    icon = icon("eraser"),
-    class = "btn-outline-secondary",
-    width = "100%"
-  ))
-  
-
-  
- 
-```
-
-## Column {width="50%"}
-
-### Row {height="50%"}
-
-```{r}
-#| echo: false
-#| width: 36%
-
-shiny::div(
-  class = "kpi-compacto",
-
-  bslib::layout_column_wrap(
-    width = 1,
-    fixed_width = FALSE,
-    heights_equal = "row",
-    fill = FALSE,
-    gap = "6px",
-
-    bslib::value_box(
-      title = "Porcentaje general",
-      value = shiny::textOutput("kpi_general"),
-      theme = "primary",
-      height = "82px"
-    ),
-
-    bslib::value_box(
-      title = "Porcentaje por departamento",
-      value = shiny::textOutput("kpi_departamento"),
-      theme = "purple",
-      height = "82px"
-    ),
-
-    bslib::value_box(
-      title = "Porcentaje por proveedor",
-      value = shiny::textOutput("kpi_proveedor"),
-      theme = "success",
-      height = "82px"
-    ),
-
-    bslib::value_box(
-      title = "Documentos pendientes",
-      value = shiny::textOutput("kpi_pendientes"),
-      theme = "danger",
-      height = "82px"
-    )
-  )
-)
-```
-
-```{r}
-#| title: "Cumplimiento Documental por proveedor"
-#| width: 64%
-
-shiny::div(
-  class = "grafico-cuadrado",
-  
-  plotOutput(
-    "grafico_departamento",
-    width = "100%",
-    height = "100%"
-  )
-)
-```
-
-### Row {height="50%"}
-
-```{r}
-#| title: "Cumplimiento por documento"
-#| fill: true
-
-DTOutput(
-  "tabla_documentos",
-  height = "100%"
-)
-```
-
-## Column {width="50%"}
-
-```{r}
-#| title: "Detalle documental"
-#| fill: true
-
-DTOutput(
-  "tabla_detalle",
-  height = "100%"
-)
-```
