@@ -116,8 +116,11 @@ header#title-block-header, .quarto-title-block, #title-block-header { display: n
 }
 .fertisa-topbar::before {
   content: ""; position: absolute; inset: 0; pointer-events: none;
-  background-image: linear-gradient(90deg, rgba(244,249,253,1) 0%, rgba(244,249,253,.99) 31%, rgba(244,249,253,.82) 50%, rgba(244,249,253,.08) 76%), var(--port-photo);
-  background-size: 100% 100%; background-position: right center; background-repeat: no-repeat;
+  /* La capa blanca se desvanece hacia la derecha; la foto se muestra con menos zoom para revelar más de la escena. */
+  background-image: linear-gradient(90deg, rgba(244,249,253,1) 0%, rgba(244,249,253,.99) 27%, rgba(244,249,253,.84) 43%, rgba(244,249,253,.42) 57%, rgba(244,249,253,0) 74%), var(--port-photo, none);
+  background-size: 100% 100%, 48% auto;
+  background-position: left top, right 52%;
+  background-repeat: no-repeat;
 }
 .topbar-copy { position: relative; z-index: 1; border-left: 3px solid #2a6097; padding-left: clamp(10px, 1vw, 15px); }
 .topbar-title { margin: 0; color: #174b83; font-size: clamp(21px, 1.7vw, 28px); font-weight: 700; line-height: 1.1; }
@@ -371,30 +374,39 @@ buscar_ruta <- function(...) {
 }
 
 # ---------- Imágenes ----------
-# >>> PEGA AQUÍ, tal cual están en tu QMD original, los tres bloques:
-#       logo_b64 <- paste0( ... )
-#       port_header_b64 <- paste0( ... )
-#       port_footer_b64 <- paste0( ... )
-# (No pegues las líneas logo_uri / port_header_uri / port_footer_uri.)
-# Si no los pegas, el reporte funciona igual, solo que sin imágenes.
-# <<< FIN DEL ESPACIO PARA IMÁGENES
-
-a_uri <- function(nombre_var) {
-  if (!exists(nombre_var, inherits = TRUE)) return("")
-  paste0("data:image/png;base64,", get(nombre_var))
+# Fotografía aérea del puerto para el encabezado.
+# Se intenta primero la ruta indicada por el usuario y luego ubicaciones relativas al QMD.
+nombre_foto_encabezado <- "DJI_0422-1.jpg.jpeg"
+rutas_foto_encabezado <- unique(c(
+  file.path("C:/Users/User/OneDrive - FAVORITA/Escritorio/datos", nombre_foto_encabezado),
+  file.path(directorio_qmd, nombre_foto_encabezado),
+  file.path(directorio_qmd, "datos", nombre_foto_encabezado),
+  file.path(getwd(), nombre_foto_encabezado),
+  file.path(getwd(), "datos", nombre_foto_encabezado)
+))
+rutas_existentes <- rutas_foto_encabezado[file.exists(rutas_foto_encabezado)]
+if (length(rutas_existentes) > 0) {
+  ruta_foto_encabezado <- normalizePath(rutas_existentes[1], winslash = "/", mustWork = TRUE)
+  # Servir el archivo original mediante Shiny: no se recodifica, redimensiona ni comprime.
+  addResourcePath("fertisa-port-header", dirname(ruta_foto_encabezado))
+  port_header_uri <- paste0("/fertisa-port-header/", URLencode(basename(ruta_foto_encabezado), reserved = TRUE))
+  message("Fotografía del encabezado cargada: ", ruta_foto_encabezado)
+} else {
+  port_header_uri <- ""
+  message(paste0("No se encontró ", nombre_foto_encabezado, ". Rutas revisadas:\n- ",
+                 paste(rutas_foto_encabezado, collapse = "\n- ")))
 }
-# Logo: prioridad 1) logo_b64 pegado arriba, 2) archivo local assets/logo.png, 3) enlace web
+
+# Logo: se mantiene la lógica original (archivo local o enlace web).
 logo_url <- "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEtWK5l_iz38pr8fPWd5zgQa_s7Yuga_cj7Vc2_56hZPdp7629jPqA1Cp4&s=10"
-logo_uri <- if (exists("logo_b64", inherits = TRUE)) {
-  a_uri("logo_b64")
-} else if (file.exists(file.path(directorio_qmd, "assets", "logo.png"))) {
+logo_uri <- if (file.exists(file.path(directorio_qmd, "assets", "logo.png"))) {
   ruta_logo <- file.path(directorio_qmd, "assets", "logo.png")
   paste0("data:image/png;base64,", jsonlite::base64_enc(readBin(ruta_logo, "raw", file.size(ruta_logo))))
 } else {
   logo_url
 }
-port_header_uri <- a_uri("port_header_b64")
-port_footer_uri <- a_uri("port_footer_b64")
+# No se modifica el pie de página original.
+port_footer_uri <- ""
 
 # Fuente del gráfico: Times New Roman en Windows, serif genérica en otros sistemas
 fuente_grafico <- if (.Platform$OS.type == "windows") "Times New Roman" else "serif"
